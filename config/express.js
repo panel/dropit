@@ -18,7 +18,9 @@ var express = require('express'),
 	flash = require('connect-flash'),
 	config = require('./config'),
 	consolidate = require('consolidate'),
-	path = require('path');
+	path = require('path'),
+	upload = require('../app/controllers/upload.server.controller');
+
 
 module.exports = function(db) {
 	// Initialize express app
@@ -75,6 +77,10 @@ module.exports = function(db) {
 	// Request body parsing middleware should be above methodOverride
 	app.use(bodyParser.urlencoded());
 	app.use(bodyParser.json());
+	app.use(bodyParser({
+		keepExtensions: true,
+		uploadDir: 'uploads'
+	}));
 	app.use(methodOverride());
 
 	// Enable jsonp
@@ -127,6 +133,12 @@ module.exports = function(db) {
 			error: err.stack
 		});
 	});
+
+	app.post('/upload', upload.create);
+
+	app.get('/uploads', upload.read);
+
+	app.get('/public/uploads/:filename', upload.getFile);
 
 	// Assume 404 since no middleware responded
 	app.use(function(req, res) {

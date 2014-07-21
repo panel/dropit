@@ -1,0 +1,15 @@
+.gallery {
+    height: 150px;
+    overflow: hidden;
+    margin-bottom: 2em;
+    position: relative;
+}
+
+.gallery::before {
+    content: "";
+    display: block;
+}
+
+.gallery img {
+    width: 100%;
+}

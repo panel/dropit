@@ -1,0 +1,14 @@
+.modal-backdrop {
+    background-color: black;
+    background-color: rgba(0,0,0,0.6);
+}
+
+.lightbox-container img {
+    display: block;
+    max-width: 80%;
+    max-height: 80%;
+
+    margin:8% auto 0;
+    position: relative;
+
+}
